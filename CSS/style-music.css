@@ -1,0 +1,17 @@
+
+h1{
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    width: right;
+    float: top;
+    text-align: center;
+    text-decoration: underline;
+}
+
+
+.music-container{
+    float: inherit;
+    margin-right: 30%;
+    margin-left: 30%;
+
+}
