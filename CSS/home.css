@@ -4,6 +4,7 @@
 /* COCKTAIL #F24C4E */
 /* PALM #1B7B34 */
 
+/* Head y footer*/
 
 #logo-header {
 	float: left;
@@ -14,7 +15,7 @@
     flex-direction: column;
 }
 	#logo-header:hover {
-		color: #1FB58F;
+		color: #1B7B34;
 	}
 	
 	#logo-header .site-name {
@@ -103,12 +104,57 @@
 #main-footer .logos .twitter-link .twitter-logo{
     width: 40px;
 }
-#main-footer .logos .instagram-link .instagram-logo{
-    width: 25px;
+#main-footer .logos .linkedin-link .linkedin-logo{
+    width: 30px;
     margin-bottom: 7px;
 }
 #main-footer .logos .github-link .github-logo{
     width: 26px;
-    margin-left: 8px;
+    margin-left: 3px;
     margin-bottom: 7px;
 }
+
+
+/* Main*/
+#bienvenida{
+    display: grid;
+    grid-template-columns: [x0] 52% [x1] 7% [x2] 50% [x3] 10%;
+    grid-template-rows: [y0] 20% [y1] 12%  [y2] 1%;
+    
+    margin-top: 4%;
+    margin-left: 2%;
+}
+
+#saludo-home{
+    grid-column: x0 /x0;
+    grid-row: y0 / y0;
+    font-family: 'Share Tech', sans-serif;
+    font-size: 800%;
+    font-weight: 1000;
+    color: #1B7B34;
+}
+
+#description-home
+{
+    grid-column: x0 /x0;
+    grid-row: y1 / y1;
+    font-family: 'Share Tech', sans-serif;
+    font-size: 400%;
+    font-weight: 1000;
+}
+
+
+#home-photo {
+    grid-column: x2;
+    grid-row: y0;
+    margin-top: 2%;
+    width: 62%;
+}
+
+#biografia{
+    grid-column: x0;
+    grid-row: y2;
+    font-size: 120%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
