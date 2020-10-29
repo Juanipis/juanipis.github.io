@@ -1,0 +1,32 @@
+
+.media-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 100px;
+}
+
+.videos .name-videos{
+    padding-left: 60px;
+    font-size: 200%;
+}
+.youtube-videos {
+    display: grid;
+    grid-template-columns: 60% 0%;
+    grid-template-rows: 55% 55%;
+}
+
+.music{
+    padding-top: 4%;
+}
+
+.name-music{
+    font-size: 200%;
+    padding-left: 30%;
+}
+
+.music-list{
+    width = "300"; 
+    height="380"; 
+    frameborder="0" allowtransparency="true" allow="encrypted-media
+}
