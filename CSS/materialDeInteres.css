@@ -1,32 +1,66 @@
+/* Paleta de colores */
+/* OCEAN #1FB58F */
+/* SAND #EAB126 */
+/* COCKTAIL #F24C4E */
+/* PALM #1B7B34 */
 
 .media-container{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin-top: 100px;
 }
 
-.videos .name-videos{
-    padding-left: 60px;
+.name-media{
+    display: flex;
+    justify-content: center;
+    margin-right: 30%;
+    margin-left: 30%;
+    padding-top: 6%;
+    font-size: 250%;
+    font-family: Arial, Helvetica, sans-serif; 
+    text-align: center;
+    border-bottom-style: solid;
+    border-color: #1B7B34;
+    
+}
+.name-fotos{
+    text-align: center;
+    font-size: 250%; 
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+.videos .name-videos{  
+    text-align: center;
     font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .youtube-videos {
     display: grid;
-    grid-template-columns: 60% 0%;
+    grid-template-columns: 50% 0%;
     grid-template-rows: 55% 55%;
 }
 
 .music{
-    padding-top: 4%;
+    padding-top: 1.5%;
 }
 
 .name-music{
     font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif;
     padding-left: 30%;
 }
 
-.music-list{
-    width = "300"; 
-    height="380"; 
-    frameborder="0" allowtransparency="true" allow="encrypted-media
+.foto-container{
+    margin: 1rem auto;
+    width:100%;
+    max-width:960px;
+    column-count: 3;
 }
+.photo-1{
+    width: 90%;
+}
+.photo-1:hover{
+    border-style: solid;
+    border-color: red;
+}
+
