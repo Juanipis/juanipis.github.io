@@ -1,0 +1,71 @@
+/* Paleta de colores */
+/* OCEAN #1FB58F */
+/* SAND #EAB126 */
+/* COCKTAIL #F24C4E */
+/* PALM #1B7B34 */
+
+#page-title{
+    display: flex;
+    justify-content: center;
+    margin-right: 30%;
+    margin-left: 30%;
+    padding-top: 6%;
+    font-size: 250%;
+    font-family: Arial, Helvetica, sans-serif; 
+    text-align: center;
+    border-bottom-style: solid;
+    border-color: #EAB126;
+}
+
+
+h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: #1B7B34;
+
+}
+h3{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+#trinidad-url{
+    text-decoration: none;
+    color: #1FB58F;
+}
+
+#loyola-url{
+    text-decoration: none;
+    color: #ac1515;
+}
+
+
+h3 a:hover{
+    border-bottom-style: solid;
+    border-bottom-color: #1B7B34 ;
+}
+
+.estudios{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 30px;
+    justify-content: center;
+}
+    .experiecia_laboral .estudios .colegio{
+        display: flex;
+        justify-content: center;   
+    }
+        .experiecia_laboral .estudios .colegio .primaria-text{
+        padding-right: 2%;
+        width: 25%;
+        }
+        .experiecia_laboral .estudios .colegio .secundaria-text{
+            padding-right: 2%;
+            padding-left: 3%;
+            width: 25%;
+        }
+#loyola-logo{
+    width: 20%;
+}
+
