@@ -16,7 +16,18 @@
     border-bottom-style: solid;
     border-color: #EAB126;
 }
-
+#page-title2{
+    display: flex;
+    justify-content: center;
+    margin-right: 30%;
+    margin-left: 30%;
+    padding-top: 2%;
+    font-size: 250%;
+    font-family: Arial, Helvetica, sans-serif; 
+    text-align: center;
+    border-bottom-style: solid;
+    border-color: #1B7B34;
+}
 
 h2{
     font-family: Arial, Helvetica, sans-serif;
@@ -68,4 +79,42 @@ h3 a:hover{
 #loyola-logo{
     width: 20%;
 }
+
+/* Certificados */ 
+.otros_estudios{
+    display: flex;
+    margin-top: 2%;
+    justify-content: space-around;
+}
+
+.otros_estudios .certificados article{
+    display: flex;
+    margin-top: 1rem;
+
+}
+.otros_estudios .certificados article div{
+    display: flex;
+}
+
+.otros_estudios .certificados article div .logo{
+    height: 3rem;
+}
+.otros_estudios .certificados article div .text{
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+}
+.otros_estudios .certificados article div .text h4{
+    margin-block-start: 0%;
+    margin-block-end: 0%;
+}
+.otros_estudios .certificados article div .text h5{
+    margin-block-start: 0%;
+    margin-block-end: 0%;
+}
+.otros_estudios .certificados article div .text h6{
+    margin-block-start: 0%;
+    margin-block-end: 0%;
+}
+
 
