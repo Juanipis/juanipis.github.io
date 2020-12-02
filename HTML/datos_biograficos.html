@@ -4,28 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/CSS/home.css">
+    <link rel="stylesheet" href="/CSS/biograficos.css">
+    <script src="/JavaScript/logic.js"></script>
     
-    <title>Juan Pablo Díaz Correa</title>
+    <title>Biográficos| Juan Pablo Díaz Correa</title>
 </head>
 <body>
     <header id="main-header">
         <img src="/Material/programming-code-signs.svg" alt="signos de progrmación">
         <a id="logo-header" href="#">
-			<span class="site-name">Juan Pablo Díaz Correa</span>
+			<span id="siteName" class="site-name">Juan Pablo Díaz Correa</span>
 			<span class="site-desc">Desarrollador Backend</span>
 		</a>
         <nav>
             <ul>
-                <li><a href="/index.html">Inicio</a></li>
-                <li><a href="/HTML/datos_biograficos.html">Datos biográficos</a></li>
-                <li><a href="/HTML/experiencia_laboral.html">Experiencia</a></li>
-                <li><a href="/HTML/linea_de_tiempo.html">Linea de tiempo</a></li>
-                <li><a href="/HTML/material_de_interes.html">Material de interés</a></li>
+                <li><a class="siteLinks" href="/index.html">Inicio</a></li>
+                <li><a class="siteLinks" href="/HTML/datos_biograficos.html">Datos biográficos</a></li>
+                <li><a class="siteLinks" href="/HTML/experiencia_laboral.html">Experiencia</a></li>
+                <li><a class="siteLinks" href="/HTML/linea_de_tiempo.html">Linea de tiempo</a></li>
+                <li><a class="siteLinks" href="/HTML/material_de_interes.html">Material de interés</a></li>
             </ul>
         </nav>
     </header>
     
-    
+    <main>
+        <h1 id="page-indice">Datos biográficos 🧬</h1>
+        <section class="data-table">
+            <table>
+                <tr>
+                    <td class="tittleText">
+                        Nombre 🐱‍👤 
+                    </td>
+                    <td class="resultText">
+                        Juan Pablo Díaz Correa
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tittleText">
+                        Edad 🎈  
+                    </td>
+                    <td class="resultText">
+                        17 años
+                    </td>
+                </tr>
+                <tr>
+                    <td  class="tittleText">
+                        Fecha de nacimiento 👶
+                    </td>
+                    <td class="resultText">
+                        8 de mayo de 2003
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tittleText">
+                        País 🚩  
+                    </td>
+                    <td class="resultText">
+                        Colombia
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tittleText">
+                        Estudios 👨‍🎓 
+                    </td>
+                    <td class="resultText">
+                        Bachiller en I.E Colegio Loyola
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tittleText">
+                        Correo electrónico 📧
+                    </td>
+                    <td class="resultText">
+                        <a href="mailto:juanipis@gmail.com">juanipis@gmail.com</a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <button type="button" id="daynightButtom" onclick="daynight()">Modo día 🌞</button>
+    </main>
 
     <footer id=main-footer>
         <span class="copyright">© Juanipis</span>

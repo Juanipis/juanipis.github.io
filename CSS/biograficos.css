@@ -1,0 +1,64 @@
+/* Paleta de colores */
+/* OCEAN #1FB58F */
+/* SAND #EAB126 */
+/* COCKTAIL #F24C4E */
+/* PALM #1B7B34 */
+
+#page-indice{
+    display: flex;
+    justify-content: center;
+    margin-top: 3.5rem;
+    margin-bottom: 0.2rem;
+    margin-right: 30%;
+    margin-left: 30%;
+    padding-top: 6%;
+    font-size: 250%;
+    font-family: Arial, Helvetica, sans-serif; 
+    text-align: center;
+    border-bottom-style: solid;
+    border-color: #EAB126;
+}
+
+.data-table{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    
+}
+
+.data-table td{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.7rem;
+}
+
+.data-table td a{
+    text-decoration: none;
+    color: #1FB58F;
+}
+.data-table td a:hover{
+    border-bottom-style: solid;
+    border-bottom-color: #EAB126;
+}
+
+#daynightButtom{
+    float: right;
+    color: #EAB126;
+    background: transparent;
+    border: 2px solid #EAB126;
+    border-radius: 6px;
+    width: 12rem;
+    height: 4rem;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    margin-right: 13rem;
+}
+#daynightButtom:hover{
+    color: #1FB58F;
+    background: #2b2e2c;
+    border: 2px solid #1FB58F;
+    border-radius: 6px;
+    
+}
