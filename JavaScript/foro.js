@@ -1,4 +1,4 @@
-var emojis_person = ["😀","😁","😃","😄","😙","😜","😲","🤠","👻","👽","👾","🤖","😺","🐱‍👤","🙉","🐵","🦊","🐴","🦄","🐔","🐸","🐼"];
+var emojis_person = ["😀","😁","😃","😄","😙","😜","😲","🤠","👻","👽","👾","🤖","😺","🐱‍👤","🙉","🐵","🦊","🐴","🦄","🐔","🐸","🐼","😎","🐲","🦒","🦁","🐯","🐶","🦝","🐮","🐷","🐗","🐭","🐹","🐻","🦓"];
 var emoji_number = 0;
 
 function random(min, max){
@@ -13,11 +13,36 @@ function emoji_identifier(){
 
 
 function required_input(name, input){
-    if ((name.length <= 200 && name.length > 0) && (input.length <= 200 && input.length > 0)) {
+    var result_name = false;
+    var result_input = false;
+    if (name.length > 0 && name.length <= 200 ) {
+        result_name = true;
+    }
+    else{
+        if (name.length <= 0) {
+            alert("Por favor escribe un nombre o ¿Acaso eres un fantasma 👻?");
+        }
+        else{
+            alert("¡Tienes un nombre demasiado grande 😮! Por favor, solo 200 caracteres");
+        }
+    }
+
+    if (input.length > 0 && input.length <= 200) {
+        result_input = true;
+    }
+    else{
+        if (input.length <= 0) {
+            alert("Por favor, escribe un mensaje, no seas malo 😥");
+        }
+        else{
+            alert("¡WOW! Tienes mucho que decir, por favor escribeme al correo juanipis@gmail.com");
+        }
+    }
+
+    if(result_name && result_input){
         return true;
     }
     else{
-        alert("El tamaño del texto supera el limite permitido de 200 caracteres o no has escrito nada")
         return false;
     }
 }

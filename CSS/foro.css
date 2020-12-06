@@ -35,6 +35,10 @@
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
+#name_message{
+    height: 1rem;
+    resize: none;
+}
 #new_message{
     height: 7rem;
     resize: none;
