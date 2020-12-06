@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/CSS/home.css">
-    
+    <link rel="stylesheet" href="/CSS/foro.css">
+    <script src="/JavaScript/foro.js"></script>
     <title>Juan Pablo Díaz Correa</title>
 </head>
 <body>
@@ -26,7 +27,25 @@
         </nav>
     </header>
     <main>
+        <h1 id="page-indices">Foro de mensajes 📫</h1>
+        <section class="formulario_completo">
+            <span id="emoji"></span>
+            <form id="messages">
+                <label for="name_message">
+                    <span>Nombre del remitente 😎</span>
+                    <input type="text" name="name_message" id="name_message" placeholder="Escribe aquí tu nombre" autocomplete="name" required>
+                </label>
+                <label for="new_message">
+                    <span id="tittle_form">Mensaje 💌</span>
+                    <textarea name="new_message" id="new_message" cols="30" rows="10" placeholder="Escribe aquí tu nuevo mensaje que no supere los 200 caracteres 💌" id="new_message" maxlength="200" minlength="0" required></textarea>
+                </label>
+            </form>
+            <input type="button" value="🏹" onclick="submit()" id="boton_send">
+        </section>
         
+
+        <section id="respuestas_formulario">
+        </section>
     </main>
     <footer id=main-footer>
         <span class="copyright">© Juanipis</span>
@@ -39,3 +58,9 @@
     </footer>
 </body>
 </html>
+
+<script>
+    window.onload = function() {
+        emoji_identifier();
+    }
+</script>

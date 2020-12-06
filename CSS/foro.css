@@ -1,7 +1,13 @@
-#page-indice{
+/* Paleta de colores */
+/* OCEAN #1FB58F */
+/* SAND #EAB126 */
+/* COCKTAIL #F24C4E */
+/* PALM #1B7B34 */
+
+#page-indices{
     display: flex;
     justify-content: center;
-    margin-top: 0.3rem;
+    margin-top: 1rem;
     margin-bottom: 0.2rem;
     margin-right: 30%;
     margin-left: 30%;
@@ -11,4 +17,70 @@
     text-align: center;
     border-bottom-style: solid;
     border-color: #1B7B34;
+}
+
+/*Formulario*/
+.formulario_completo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+#emoji{
+    font-size: 5rem;
+}
+.formulario_completo label{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#new_message{
+    height: 7rem;
+    resize: none;
+}
+#boton_send{
+    font-size: 2.5rem;
+    background: none;
+    border: none;
+    margin-left: 0.2rem;
+
+}
+#boton_send:hover{
+    background: none;
+    border-bottom-style: solid;
+    
+    border-color:  #1FB58F;
+}
+
+/*Mensajes*/
+.new_message_enter{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    
+}
+
+.new_message_enter span{
+    font-size: 5rem;
+}
+.new_message_enter p{
+    width: 23rem;
+    border-bottom-style: solid;
+    border-width: 0.15rem;
+    border-color: #1B7B34;
+}
+
+.new_message_enter t{
+    align-self: center;
+}
+
+.new_message_enter t p{
+    margin: 0rem;
+    margin-left: 0.2rem;
+    text-align: center;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
