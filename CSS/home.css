@@ -197,7 +197,14 @@ IMPORTANTE PARA QUE DATOS BIOGRAFICOS FUNCIONE CORRECTAMENTE*/
     border-bottom-style: solid;
     border-color: #EAB126;
 }
-
+#creativecommons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.creativecommonstext{
+    text-align: center;
+}
 /*
 
 #bienvenida{
