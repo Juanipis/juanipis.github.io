@@ -6,157 +6,120 @@
 
 /* Head y footer*/
 
-#logo-header {
-	float: left;
-	padding: 15px 0 0 20px;
-    text-decoration: none;
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
+/*
+    Paleta de col-smores de google
+    Azul: #4285f4
+    Verde: #34a853
+    Amarillo: #fbbc05
+    Rojo: #ea4335
+*/
+
+
+.navbar-custom {
+    color: #fff;
+   
 }
-	#logo-header:hover {
-		color: #1B7B34;
-	}
-	
-	#logo-header .site-name {
-		font-weight: 700;
-        font-size: 150%;
-        flex-wrap: wrap;
-	}
-	
-	#logo-header .site-desc {
-		display: block;
-		font-weight: 700;
-        color: #1FB58F;
-        flex-wrap: wrap;
-    }
 
-
-#main-header {
-	background: #ffffff;
-	color: #262228;
-    height: 80px;
-    border-bottom: black 5px solid;
-    width: 100%;
-    left: 0;
-    top: 0;
-    position: fixed;
-}	
-	#main-header a {
-        color: #000000;
-        
-    }
+.custom-toggler.navbar-toggler {
+    background-color: #fbbc05;
+    color: rgb(202, 183, 14);
     
-    #main-header img{
-        float: left;
-        width: 40px;
-        margin-top: 1.3%;
-        margin-left: 2%;
-        
-        
-    }
+}
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(250,250,250, 1.2)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  } 
+.nav-link{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 50px;
+    
+}
+button.navbar-toggler{
+    background-color: #049764;
+    color: #fff;
+}
+#btnInicio {
+    
+    background-color: #049764;
+}
+#btnProyectos {
+    background-color: #AE3ACB;
+}
+#btnContacto {
+    background-color: #FF45A4;
+}
 
-    nav {
-        float: right;
-        
-    }
-        nav ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            padding-right: 20px;
-        }
-        
-            nav ul li {
-                display: inline-block;
-                line-height: 80px;
-            }
-                
-                nav ul li a {
-                    font-family: 'Cabin', sans-serif;
-                    font-weight: 600;
-                    display: block;
-                    padding: 0 10px;
-                    text-decoration: none;
-                }
-                
-                    nav ul li a:hover {
-                        background: #1FB58F;
-                    }
 
-#main-footer {
-    position: static;
-    left:0px;
-    bottom:0px;
-    height:40%;
+html{
     width:100%;
-    background: #cccccc;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    
+    height:100%;
+    background: #1337C6;
+    position: relative;
 }
-
-#main-footer .logos{
-    margin-left: 120px;
-}
-
-#main-footer .logos .twitter-link .twitter-logo{
-    width: 40px;
-}
-#main-footer .logos .linkedin-link .linkedin-logo{
-    width: 30px;
-    margin-bottom: 7px;
-}
-#main-footer .logos .github-link .github-logo{
-    width: 26px;
-    margin-left: 3px;
-    margin-bottom: 7px;
-}
-
 
 /* Main*/
-.bienvenida{
-    display: flex;
+body{
+    width:100%;
+    height:100%;
+    background: #1337C6;
+    position: relative;
+    background: #1337C6;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.bienvenida-presentation{
-    margin-top: 10%;
-    margin-left: 7%;
-    display: grid;
-    grid-template-columns: 100% ;
-    grid-template-rows: 20% ;
+
+.bienvenida{
+    background:#1337C6;
+    max-width: 10000px;
+    
+    
+    
+    
 }
-.bienvenida-presentation h1{
-    font-family: 'Share Tech', sans-serif;
-    font-size: 500%;
-    font-weight: 1000;
-    color: #1B7B34;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
+div.col.texto{
+    color: #ffff;
+    font-family: 'Roboto', sans-serif;
+    margin-left: 5rem;
+    font-size: 1.5rem;
 }
-.bienvenida-presentation h2{
-    font-family: 'Share Tech', sans-serif;
-    font-size: 300%;
-    font-weight: 500;
-    color: #1FB58F;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
+
+h1#saludo{
+    font-size: 7rem;
+    margin-top: 5rem
 }
-.bienvenida-presentation article{
-    font-size: 150%;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-top: -10%;
-    padding-right: 10%;
-}
+
 
 
 .bienvenida img{
     margin-top: 4%;
     width: 400px;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
+div.row.redes{
+    margin-top: 1rem;
+}
+div.row.redes div.col{
+    text-align:center;
+}
+div.row.redes div.col img{
+    width: 4rem;
+}
+div.row.redes div.col a{
+    color: #fff;
+}
+div.row.redes div.col a:hover{
+    color: #049764;
+}
 /* NO HACER ESTO EN UN NUEVO PROYECTO
 IMPORTANTE PARA QUE DATOS BIOGRAFICOS FUNCIONE CORRECTAMENTE*/
 

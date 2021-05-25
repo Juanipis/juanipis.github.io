@@ -3,13 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/home.css">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!---->
+
+    <link rel="stylesheet" href="./CSS/home.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <title>Inicio | Juan Pablo Díaz Correa</title>
     <meta name="robots" content="index, follow"/>
 </head>
-<body>
-    <header id="main-header">
+<body class="d-flex p-2 bd-highlight">
+    <header class="">
+        <nav class="navbar navbar-expand-lg navbar-custom center ">
+            <div class="container-fluid">
+                <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a id="btnInicio" class="nav-link" aria-current="page" href="./index.html">Inicio</a>
+                        </li>
+                        
+                        
+                        <li class="nav-item">
+                            <a id="btnProyectos" class="nav-link" href="#">Proyectos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="btnContacto" class="nav-link " href="#" tabindex="-1" aria-disabled="true">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--
         <img src="/Material/programming-code-signs.svg" alt="signos de progrmación">
         <a id="logo-header" href="#">
 			<span class="site-name">Juan Pablo Díaz Correa</span>
@@ -25,22 +53,46 @@
                 <li><a href="/HTML/foro_de_mensajes.html">Foro de mensajes</a></li>
             </ul>
         </nav>
+        -->
     </header>
-    <main>
-        <section class="bienvenida">
-            <section class="bienvenida-presentation">
-                <h1>¡Hola!</h1>
-                <h2>Soy Juan Pablo Díaz Correa</h2>
-                <article>
-                    Un estudiante de la Institución Educativa Colegio Loyola para la ciencia y la innovación, líder del equipo RIL-A y actualmente estoy en el grado 11. 
-                    Soy un aficionado de la robótica especializado en la programación y he participado en algunas competencias con mi colegio (aunque nunca hemos ganado más que la experiencia). 
-                    Me gusta mucho el deporte, especialmente el tenis de campo que lo practico durante la semana, además monto bicicleta los fines de semana y también por los distintos cerros, montañas y páramos de Antioquia.
-                </article>
-            </section>
-                <img src="/Material/photos/juan_pablo_home_cut.jpg" alt="Foto de Juan Pablo Díaz Correa">
-        </section>
-        
+    
+    <main class="" >
+        <section class="bienvenida container-fluid d-flex justify-content-around">
+            <div class="row d-flex justify-content-around" >
+                <div class="col texto">
+                    <h1 id="saludo">Hola.</h1>
+                    <h2>Soy Juan Pablo Díaz Correa</h2>
+                    
+                    <p>Desarrollador Backend en Python y Java</p>
+                    <img src="./Material/teconolgia_iconos.svg" alt="Python Java Linux Logo">
+                    <hr/>
+                    <p>Estudiante de Ingeniería en Sistemas y Computación</p><p> Universidad EIA</p>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <img class="logo" src="/Material/juanpablofoto1.svg" alt="Foto de Juan Pablo Díaz Correa">
+                        </div>
+                    </div>
+                    <div class="row redes">
+                        <div class="col">
+                            <a href="https://twitter.com/Juanipis"><img src="./Material/twitter_logo_yellow.svg" alt=""></a>
+                            <a href="https://twitter.com/Juanipis">@Juanipis</a>
+                        </div>
+                        <div class="col">
+                            <a href="https://github.com/Juanipis"><img src="./Material/github_logo_purple.svg" alt=""></a>
+                            <a href="https://github.com/Juanipis">@Juanipis</a>
+                        </div>
+                        <div class="col">
+                            <a href="https://www.linkedin.com/in/juanipis/"><img src="./Material/linkedin_logo_blanco.svg" alt=""></a>
+                            <a href="https://www.linkedin.com/in/juanipis/">/in/Juanipis/</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
     </main>
+    <!--
     <footer id=main-footer>
         <span class="copyright">© Juanipis</span>
         <span class="logos">
@@ -50,5 +102,9 @@
         </span>
         <span class="flaticon">Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></span>
     </footer>
+    -->
+
+    <!--Bootstrap script-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>
