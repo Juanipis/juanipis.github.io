@@ -1,0 +1,84 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { projects } from "../data/projects";
+import { getDictionary, type Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<BaseLayout locale={locale} path="/projects/" title={t.meta.projectsTitle} description={t.meta.projectsDesc}>
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-6xl">
+      <header class="enter mb-12 text-center" style="--from-y: -20px">
+        <h1 class="gradient-text text-4xl font-bold tracking-tight">{t.projects.heading}</h1>
+        <p class="enter mt-3 text-lg text-muted" style="--d: 300ms; --from-y: 15px">{t.projects.subtitle}</p>
+      </header>
+
+      <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          projects.map((project, i) => (
+            <li class="reveal group card card-hover flex flex-col overflow-hidden" style="--from-y: 30px">
+              <div class="relative aspect-video overflow-hidden bg-track">
+                {project.image ? (
+                <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={600}
+                    height={340}
+                    widths={[400, 600, 800]}
+                    sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
+                    fit="cover"
+                    format="webp"
+                    quality={70}
+                    loading={i < 3 ? "eager" : "lazy"}
+                    class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div class="mesh grid size-full place-items-center" aria-hidden="true">
+                    <span class="grid size-20 place-items-center rounded-2xl text-white shadow-lg transition-transform duration-500 group-hover:scale-110 gradient-bg">
+                      <Icon name={project.technologies[0]} size={40} />
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div class="flex flex-1 flex-col gap-3 p-4">
+                <div>
+                  <h2 class="font-bold">{project.title}</h2>
+                  <p class="mt-1 text-sm text-muted">{project.description[locale]}</p>
+                </div>
+                <div class="mt-auto flex items-center justify-between">
+                  <ul class="flex flex-wrap gap-2 text-logo">
+                    {project.technologies.map((tech) => (
+                      <li class="opacity-60 transition duration-200 group-hover:opacity-90 hover:scale-125 hover:rotate-6">
+                        <Icon name={tech} size={18} label={tech} />
+                      </li>
+                    ))}
+                  </ul>
+                  {project.url && (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1 text-sm font-medium text-muted no-underline transition-colors hover:text-fg"
+                    >
+                      {t.projects.viewProject}
+                      <span class="sr-only">{project.title}</span>
+                      <svg width="14" height="14" viewBox="0 0 15 15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.646 11.354a.5.5 0 0 1 0-.708L10.293 4H6a.5.5 0 0 1 0-1h5.5a.5.5 0 0 1 .5.5V9a.5.5 0 0 1-1 0V4.707l-6.646 6.647a.5.5 0 0 1-.708 0Z"></path></svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

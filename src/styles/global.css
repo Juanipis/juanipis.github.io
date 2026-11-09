@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+/* El modo oscuro lo decide data-theme en <html> (lo pone el script de BaseLayout). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Paleta: claro = fiordo al atardecer (azul pizarra + ámbar, sacada de la foto de portada),
+   oscuro = carmesí/naranja (araña). Contraste sobre --bg: fg 14.8, muted 5.8, accent 7.8, accent-2 3.9. */
+:root {
+  color-scheme: light;
+  --bg: #fbf8f1;
+  --fg: #1f2330;
+  --muted: #5b6170;
+  --accent: #35506f;
+  --accent-2: #b86a12;
+  --accent-fg: #35506f; /* acento para texto (7.8:1) */
+  --accent-2-solid: #9a5a0f; /* final de fondos con texto blanco encima (5.5:1) */
+  --accent-soft: rgba(53, 80, 111, 0.3);
+  --logo: #2c3e57;
+  --surface: rgba(255, 255, 255, 0.6);
+  --surface-strong: rgba(251, 248, 241, 0.8);
+  --border: rgba(31, 35, 48, 0.1);
+  --border-strong: rgba(31, 35, 48, 0.2);
+  --track: rgba(31, 35, 48, 0.08);
+  --mesh-1: rgba(53, 80, 111, 0.09);
+  --mesh-2: rgba(253, 200, 120, 0.22);
+  --mesh-3: rgba(166, 164, 175, 0.12);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111110;
+  --fg: #eeeeec;
+  --muted: #b5b3ad;
+  --accent: #e11d48;
+  --accent-2: #f97316;
+  --accent-fg: #fb7185; /* acento para texto sobre fondo oscuro (7:1) */
+  --accent-2-solid: #c2410c; /* final de fondos con texto blanco encima (5.2:1) */
+  --accent-soft: rgba(225, 29, 72, 0.3);
+  --logo: #b0436e;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-strong: rgba(20, 20, 20, 0.75);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --track: rgba(255, 255, 255, 0.1);
+  --mesh-1: rgba(225, 29, 72, 0.08);
+  --mesh-2: rgba(249, 115, 22, 0.06);
+  --mesh-3: rgba(236, 72, 153, 0.04);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-fg: var(--accent-fg);
+  --color-logo: var(--logo);
+  --color-surface: var(--surface);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-track: var(--track);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI (Custom)", Roboto,
+    "Helvetica Neue", "Open Sans (Custom)", system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--fg);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply font-sans;
+    background: var(--bg);
+    color: var(--fg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a {
+    color: inherit;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Mostrar u ocultar según el tema (fotos, logo de montaña/araña). */
+[data-theme="dark"] .only-light,
+:root:not([data-theme="dark"]) .only-dark {
+  display: none !important;
+}
+
+@layer components {
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+    padding-bottom: 0.1em;
+  }
+  .gradient-bg {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2-solid));
+  }
+  .mesh {
+    background:
+      radial-gradient(ellipse at 20% 50%, var(--mesh-1) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, var(--mesh-2) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, var(--mesh-3) 0%, transparent 50%);
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-strong);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+  .chip {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    transition: transform 0.2s ease;
+  }
+  .chip:hover {
+    transform: translateY(-2px) scale(1.05);
+  }
+}
+
+/* ---------- Animaciones (sin JavaScript de terceros) ---------- */
+
+/* Arranca en 0.01 y no en 0: con opacidad 0 Chrome no cuenta el primer pintado como contenido
+   (la animación corre en la GPU sin volver a pintar) y Lighthouse/Core Web Vitals ven la página vacía. */
+@keyframes fade-up {
+  from {
+    opacity: 0.01;
+    transform: translateY(var(--from-y, 24px)) scale(var(--from-scale, 1));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Entrada al cargar: style="--d: 300ms" fija el retraso. */
+.enter {
+  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* Retrasos a la mitad: todo queda visible en < 1 s (Lighthouse mide el contraste justo después de cargar). */
+  animation-delay: calc(var(--d, 0ms) * 0.5);
+}
+
+/* Entrada al aparecer en pantalla: el script de BaseLayout añade .is-visible.
+   Solo desplaza, nunca oculta: el contenido de más abajo siempre es legible para lectores
+   de pantalla, agentes y Lighthouse aunque nadie haga scroll. Solo aplica con JS (html.js). */
+.js .reveal {
+  transform: translateY(var(--from-y, 20px)) scale(var(--from-scale, 1));
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--d, 0ms);
+}
+.js .reveal.is-visible {
+  transform: none;
+}
+
+/* Barras de idioma: crecen hasta --w cuando aparecen. */
+.bar-fill {
+  width: var(--w);
+}
+.js .reveal .bar-fill {
+  width: 0;
+  transition: width 0.8s ease;
+  transition-delay: calc(var(--d, 0ms) + 200ms);
+}
+.js .reveal.is-visible .bar-fill {
+  width: var(--w);
+}
+
+.pulse-ring {
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+/* Transición suave entre páginas (navegadores con View Transitions entre documentos). */
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js .reveal {
+    transform: none;
+  }
+  @view-transition {
+    navigation: none;
+  }
+}

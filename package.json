@@ -1,0 +1,25 @@
+{
+  "name": "juanipis-xyz",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio personal de Juan Pablo D\u00edaz Correa (Juanipis), est\u00e1tico con Astro. Publicado en https://juanipis.xyz con GitHub Pages.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "og": "node scripts/og.mjs"
+  },
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "tailwindcss": "^4.3.5"
+  }
+}

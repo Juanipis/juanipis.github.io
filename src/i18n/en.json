@@ -1,0 +1,133 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "home": {
+    "greeting": "Hello, I'm Juanipis",
+    "subtitle": "Systems and Computer Engineer · EIA University",
+    "description": "Systems and Computer Engineer from EIA University, based in Medellín, Colombia. I design multi-tenant SaaS backends, enterprise apps on Power Platform and AI agents that do real work — and I love taking apart how things work.",
+    "techHeading": "Technologies I work with"
+  },
+  "about": {
+    "title": "Systems and Computer Engineer (EIA University)",
+    "aboutHeading": "About me",
+    "aboutText": "I'm a <strong>Systems and Computer Engineering</strong> graduate from <em>EIA University</em>. Today I'm the <strong>technical lead</strong> at <strong>PROCOL</strong>: I own the technical side and how we build software, hand in hand with our software team lead. There I build a <strong>Go + PostgreSQL</strong> multi-tenant SaaS on Azure and enterprise apps with <strong>Power Apps Code Apps</strong>, and I build <strong>AI agents</strong> for <strong>ABACO</strong> that write food-security policy bulletins and answer questions over child-nutrition data. Outside work I reverse-engineer file formats and protocols, write native macOS apps and automate my home.",
+    "experienceHeading": "Experience",
+    "currentLabel": "Current",
+    "techStackHeading": "Tech Stack",
+    "educationHeading": "Education",
+    "educationDegree": "Systems and Computer Engineering",
+    "educationSchool": "EIA University",
+    "educationPeriod": "Jan 2021 - Dec 2025 (Graduated)",
+    "languagesHeading": "Languages",
+    "spanish": "Spanish",
+    "english": "English",
+    "native": "Native",
+    "softSkillsHeading": "Soft Skills",
+    "experiences": [
+      {
+        "role": "Technical Lead",
+        "period": "Nov 2025 - Present",
+        "company": "PROCOL",
+        "companyUrl": "https://www.procol.no/",
+        "concurrent": "current",
+        "summary": "I lead the technical side — architecture, engineering practices and how we build software — working hand in hand with the software team lead.",
+        "highlights": [
+          "Designed and built the Go + PostgreSQL backend of a construction-contract accounting SaaS: multi-tenant identity with Ory Hydra federated to each customer's Entra ID and Bicep infrastructure on Azure; cut critical queries from 9.4 s to 71 ms.",
+          "Adopted Power Apps Code Apps while still in preview and bootstrapped the team's React / TypeScript app on Dataverse with Clean/Hexagonal Architecture.",
+          "Dataverse Custom APIs, security roles, fine-grained data access and audited production data migrations.",
+          "Integrated AI agents with Power Platform and Teams that review code and build features in Azure DevOps over MCP.",
+          "Set up the team's AI-assisted workflow, published a React design system as a private npm package and reverse-engineered Revit's .rvt format into a WebAssembly + Three.js viewer."
+        ]
+      },
+      {
+        "role": "AI Engineer (Freelance)",
+        "period": "Aug 2025 - Present",
+        "company": "ABACO",
+        "concurrent": "current",
+        "summary": "AI agents for Colombia's food bank association.",
+        "highlights": [
+          "Built the multi-agent platform (Pydantic AI on Azure OpenAI) that writes food-security policy bulletins: analysis in a sandbox, Plotly figures and publication-ready PDF and DOCX with human-in-the-loop review.",
+          "Built the Observatory agent on AWS Lambda that answers questions over child-nutrition indicators with charts, choropleth maps and time series.",
+          "Collaborated on the public chatbot's RAG service and the public-health data pipelines; author of pdfgen-juanipis, the HTML-to-PDF library behind the bulletins."
+        ]
+      },
+      {
+        "role": "Intern",
+        "period": "Jan 2025 - Jul 2025",
+        "company": "ISA",
+        "companyUrl": "https://www.isa.co/",
+        "summary": "Digitized the field-visit process.",
+        "highlights": [
+          "Replaced a manual Excel process with a Survey123 form (georeferenced photos and voice notes) and a Power Automate flow that stored the data in SharePoint.",
+          "Built a Python (Flet) desktop app that generates reports and transcribes audio with faster-whisper."
+        ]
+      },
+      {
+        "role": "Full Stack Remote Developer",
+        "period": "Jun 2023 - Feb 2024",
+        "company": "Kuenta",
+        "companyUrl": "https://kuenta.co/",
+        "summary": "Backend and frontend for a fintech platform.",
+        "highlights": [
+          "Go and Python (gRPC) microservices, AI services and Dockerfiles.",
+          "Angular-Ionic components, GitLab CI/CD pipelines and bug fixing in Java services."
+        ]
+      }
+    ],
+    "softSkills": [
+      "Teamwork",
+      "Problem Solving",
+      "Leadership",
+      "Communication",
+      "Adaptability",
+      "Time Management"
+    ],
+    "awardsHeading": "Awards",
+    "awards": [
+      {
+        "title": "Second Place, Generative AI Hackathon",
+        "text": "EIA University · a chatbot that generates product backgrounds for ads."
+      }
+    ]
+  },
+  "projects": {
+    "heading": "My Projects",
+    "subtitle": "A collection of things I've built",
+    "viewProject": "View"
+  },
+  "contact": {
+    "heading": "Let's Connect",
+    "subtitle": "I'm a freelancer, always open to proposals, ideas and projects that want to change the world."
+  },
+  "meta": {
+    "homeTitle": "Juanipis | Systems and Computer Engineer",
+    "homeDesc": "Portfolio of Juan Pablo Díaz Correa (Juanipis), Systems and Computer Engineer from EIA University (Colombia): SaaS backends in Go, Power Platform apps and AI agents. Open to freelance work.",
+    "aboutTitle": "Juanipis | About Me",
+    "aboutDesc": "Learn about Juan Pablo Díaz Correa (Juanipis): Systems and Computer Engineer from EIA University with experience in AI agents, SaaS backends and Power Platform.",
+    "projectsTitle": "Juanipis | Projects",
+    "projectsDesc": "Explore the projects of Juan Pablo Díaz Correa (Juanipis): AI agents, web apps, mobile apps, APIs, and more.",
+    "contactTitle": "Juanipis | Contact",
+    "contactDesc": "Get in touch with Juan Pablo Díaz Correa (Juanipis). Connect on GitHub, LinkedIn, or send an email."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "This page doesn't exist or was moved.",
+    "back": "Back home"
+  },
+  "ui": {
+    "menu": "Menu",
+    "toggleTheme": "Toggle dark mode",
+    "switchLang": "Cambiar a español",
+    "backToTop": "Back to top",
+    "skip": "Skip to content"
+  },
+  "hire": {
+    "badge": "Open to freelance work",
+    "text": "I work as an independent freelancer and I'm always open to proposals: AI agents, SaaS backends, Power Platform apps, or any project that wants to change the world. Write to me in English or Spanish.",
+    "cta": "Send a proposal"
+  }
+}

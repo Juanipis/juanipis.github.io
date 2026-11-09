@@ -1,0 +1,123 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import coverLight from "../assets/cover-photo-light.webp";
+import coverDark from "../assets/cover-photo-dark.jpg";
+import { getDictionary, localizePath, type Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+
+const techs = [
+  { icon: "python", label: "Python" },
+  { icon: "typescript", label: "TypeScript" },
+  { icon: "go", label: "Go", size: 60 },
+  { icon: "dotnet", label: "C# / .NET" },
+  { icon: "react", label: "React" },
+  { icon: "fastapi", label: "FastAPI" },
+  { icon: "postgresql", label: "PostgreSQL" },
+  { icon: "openai", label: locale === "es" ? "Agentes de IA" : "AI agents" },
+  { icon: "powerapps", label: "Power Platform" },
+  { icon: "azure", label: "Azure" },
+  { icon: "aws", label: "AWS" },
+  { icon: "docker", label: "Docker" },
+];
+---
+
+<BaseLayout locale={locale} path="/" title={t.meta.homeTitle} description={t.meta.homeDesc}>
+  <section class="mesh flex min-h-[85vh] items-center justify-center px-4 sm:px-8">
+    <div class="flex w-full max-w-6xl flex-col items-center gap-8 py-12 lg:flex-row lg:gap-16">
+      <div class="enter flex-1 text-center lg:text-left" style="--from-y: 40px">
+        <div class="enter mb-4 inline-flex text-logo" style="--d: 200ms; --from-y: 0; --from-scale: 0.9">
+          <span class="inline-block transition-transform duration-300 hover:scale-110 hover:rotate-6">
+            <Icon name="hiking" size={50} class="only-light" />
+            <Icon name="spider" size={50} class="only-dark cursor-pointer" data-spider />
+          </span>
+        </div>
+
+        <h1 class="enter gradient-text text-5xl font-bold tracking-tight md:text-6xl" style="--d: 300ms">
+          {t.home.greeting}
+        </h1>
+
+        <p class="enter mt-4 text-2xl text-muted" style="--d: 500ms">{t.home.subtitle}</p>
+
+        <p class="enter mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted lg:mx-0" style="--d: 700ms">
+          {t.home.description}
+        </p>
+
+        <div class="enter mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start" style="--d: 900ms">
+          <span class="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-sm font-medium" style="background: var(--surface)">
+            <span class="relative flex size-2.5" aria-hidden="true">
+              <span class="pulse-ring absolute inset-0 rounded-full bg-emerald-500"></span>
+              <span class="relative size-2.5 rounded-full bg-emerald-500"></span>
+            </span>
+            {t.hire.badge}
+          </span>
+          <a
+            href={localizePath(locale, "/contact/")}
+            class="gradient-bg rounded-full px-5 py-2 text-sm font-semibold text-white no-underline shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            {t.hire.cta} →
+          </a>
+        </div>
+      </div>
+
+      <div class="enter shrink-0" style="--d: 400ms; --from-y: 0; --from-scale: 0.9">
+        <div
+          class="relative overflow-hidden rounded-2xl shadow-2xl transition-transform duration-500 hover:scale-[1.03] hover:rotate-1"
+        >
+          <Image
+            src={coverLight}
+            alt="Juan Pablo Diaz Correa"
+            width={380}
+            height={500}
+            densities={[1, 2]}
+            fit="cover"
+            loading="eager"
+            fetchpriority="high"
+            class="only-light h-[500px] w-[380px] max-w-full object-cover"
+          />
+          <Image
+            src={coverDark}
+            alt="Juan Pablo Diaz Correa"
+            width={380}
+            height={500}
+            densities={[1, 2]}
+            fit="cover"
+            loading="eager"
+            class="only-dark h-[500px] w-[380px] max-w-full object-cover"
+          />
+          <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-16 sm:px-8">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="reveal mb-10 text-center text-2xl font-bold opacity-80" style="--from-y: 30px">
+        {t.home.techHeading}
+      </h2>
+      <ul class="grid grid-cols-3 gap-4 sm:grid-cols-4 sm:gap-6 md:grid-cols-6">
+        {
+          techs.map((tech, i) => (
+            <li
+              class="reveal card card-hover flex flex-col items-center gap-3 p-4"
+              style={`--d: ${i * 60}ms; --from-scale: 0.9`}
+            >
+              <span class="grid h-[60px] place-items-center text-logo">
+                <Icon name={tech.icon} size={tech.size ?? 40} />
+              </span>
+              <span class="text-sm font-medium text-muted">{tech.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

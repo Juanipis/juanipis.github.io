@@ -1,0 +1,5 @@
+import type { APIRoute } from "astro";
+import { llmsFull } from "../../data/agent";
+
+export const GET: APIRoute = () =>
+  new Response(llmsFull("es"), { headers: { "Content-Type": "text/plain; charset=utf-8" } });

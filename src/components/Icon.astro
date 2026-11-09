@@ -1,0 +1,23 @@
+---
+// Ícono SVG de src/icons. Usa fill="currentColor": el color sale de la clase (p. ej. text-logo).
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"svg"> {
+  name: string;
+  size?: number | string;
+  label?: string;
+}
+
+const icons = import.meta.glob<{ default: (props: Record<string, unknown>) => unknown }>(
+  "../icons/*.svg",
+  { eager: true },
+);
+
+const { name, size = 24, label, ...rest } = Astro.props;
+const mod = icons[`../icons/${name}.svg`];
+if (!mod) throw new Error(`No existe el ícono "${name}" en src/icons`);
+const Svg = mod.default;
+const a11y = label ? { role: "img", "aria-label": label } : { "aria-hidden": "true" };
+---
+
+<Svg width={size} height={size} {...a11y} {...rest} />

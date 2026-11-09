@@ -1,0 +1,116 @@
+---
+import { Image } from "astro:assets";
+import avatarLight from "../assets/avatar_juanipis.jpg";
+import avatarDark from "../assets/avatar_juanipis_dark.jpg";
+import { getDictionary, localizePath, otherLocale, type Locale, type RoutePath } from "../i18n";
+
+interface Props {
+  locale: Locale;
+  path: RoutePath;
+}
+
+const { locale, path } = Astro.props;
+const t = getDictionary(locale);
+const links: { path: RoutePath; label: string }[] = [
+  { path: "/", label: t.nav.home },
+  { path: "/about-me/", label: t.nav.about },
+  { path: "/projects/", label: t.nav.projects },
+  { path: "/contact/", label: t.nav.contact },
+];
+const target = otherLocale(locale);
+---
+
+<nav class="enter sticky top-0 z-50 w-full px-2 pt-2 md:px-3 md:pt-3" style="--from-y: -20px">
+  <div
+    class="flex items-center justify-between gap-2 rounded-2xl border border-line px-4 py-2 shadow-[0_4px_30px_rgba(0,0,0,0.05)] backdrop-blur-xl backdrop-saturate-150 md:px-6"
+    style="background: var(--surface-strong)"
+  >
+    <a href={localizePath(locale, "/")} class="flex items-center gap-2 no-underline">
+      <span class="block size-10 overflow-hidden rounded-full transition-transform hover:scale-110">
+        <Image src={avatarLight} alt="" width={80} height={80} class="only-light size-full object-cover" loading="eager" />
+        <Image src={avatarDark} alt="" width={80} height={80} class="only-dark size-full object-cover" loading="eager" />
+      </span>
+      <span class="text-xl font-bold md:text-2xl">Juanipis</span>
+    </a>
+
+    <div class="flex items-center gap-1">
+      <ul class="hidden items-center gap-1 md:flex">
+        {
+          links.map((link) => {
+            const active = link.path === path;
+            return (
+              <li>
+                <a
+                  href={localizePath(locale, link.path)}
+                  aria-current={active ? "page" : undefined}
+                  class:list={[
+                    "relative block rounded-lg px-3 py-1.5 text-sm font-medium no-underline transition hover:-translate-y-0.5",
+                    active
+                      ? "font-semibold text-accent-fg after:absolute after:-bottom-0.5 after:left-[20%] after:h-0.5 after:w-[60%] after:rounded-full after:bg-linear-to-r after:from-accent after:to-accent-2"
+                      : "border border-line hover:border-line-strong",
+                  ]}
+                  style={active ? "background: color-mix(in srgb, var(--accent) 12%, transparent)" : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <details class="group relative md:hidden" data-menu>
+        <summary
+          class="flex cursor-pointer list-none items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-accent-fg [&::-webkit-details-marker]:hidden"
+          style="background: color-mix(in srgb, var(--accent) 12%, transparent)"
+        >
+          <svg width="18" height="18" viewBox="0 0 15 15" fill="currentColor" aria-hidden="true"><path d="M1.5 3a.5.5 0 0 0 0 1h12a.5.5 0 0 0 0-1h-12ZM1 7.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5ZM1 11.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5Z"></path></svg>
+          {t.ui.menu}
+        </summary>
+        <ul
+          class="absolute right-0 mt-2 min-w-[180px] rounded-xl border border-line p-2 shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
+          style="background: color-mix(in srgb, var(--bg) 96%, transparent)"
+        >
+          {
+            links.map((link) => (
+              <li>
+                <a
+                  href={localizePath(locale, link.path)}
+                  aria-current={link.path === path ? "page" : undefined}
+                  class:list={[
+                    "my-1 block rounded-lg px-3 py-2.5 no-underline transition-colors hover:bg-track",
+                    link.path === path && "bg-track font-semibold",
+                  ]}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+
+      <a
+        href={localizePath(target, path)}
+        hreflang={target}
+        lang={target}
+        data-set-locale={target}
+        title={t.ui.switchLang}
+        class="ml-1 grid min-w-9 place-items-center rounded-lg px-2 py-2 text-sm font-semibold text-muted no-underline transition-colors hover:bg-track hover:text-fg"
+      >
+        {target.toUpperCase()}
+      </a>
+
+      <button
+        type="button"
+        data-theme-toggle
+        title={t.ui.toggleTheme}
+        aria-label={t.ui.toggleTheme}
+        class="ml-1 grid size-9 cursor-pointer place-items-center rounded-lg text-muted transition-colors hover:bg-track hover:text-fg"
+      >
+        <svg class="only-light" width="16" height="16" viewBox="0 0 15 15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5ZM2.197 2.197a.5.5 0 0 1 .707 0L4.318 3.61a.5.5 0 0 1-.707.707L2.197 2.904a.5.5 0 0 1 0-.707ZM.5 7a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2Zm1.697 5.803a.5.5 0 0 1 0-.707l1.414-1.414a.5.5 0 1 1 .707.707l-1.414 1.414a.5.5 0 0 1-.707 0ZM12.5 7a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2Zm-1.818-2.682a.5.5 0 0 1 0-.707l1.414-1.414a.5.5 0 1 1 .707.707L11.39 4.318a.5.5 0 0 1-.707 0ZM8 12.5a.5.5 0 0 0-1 0v2a.5.5 0 0 0 1 0v-2Zm2.682-1.818a.5.5 0 0 1 .707 0l1.414 1.414a.5.5 0 1 1-.707.707l-1.414-1.414a.5.5 0 0 1 0-.707ZM5.5 7.5a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm2-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"></path></svg>
+        <svg class="only-dark" width="16" height="16" viewBox="0 0 15 15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.9.5a.4.4 0 0 0-.8 0v.6h-.6a.4.4 0 1 0 0 .8h.6v.6a.4.4 0 1 0 .8 0v-.6h.6a.4.4 0 0 0 0-.8h-.6V.5Zm3 3a.4.4 0 1 0-.8 0v.6h-.6a.4.4 0 1 0 0 .8h.6v.6a.4.4 0 1 0 .8 0v-.6h.6a.4.4 0 0 0 0-.8h-.6v-.6Zm-4 3a.4.4 0 1 0-.8 0v.6H.5a.4.4 0 1 0 0 .8h.6v.6a.4.4 0 0 0 .8 0v-.6h.6a.4.4 0 0 0 0-.8h-.6v-.6ZM8.544.982l-.298-.04c-.213-.024-.34.224-.217.4A6.57 6.57 0 0 1 9.203 5.1a6.602 6.602 0 0 1-6.243 6.592c-.244.012-.258.37-.022.432a6.6 6.6 0 0 0 1.721.228h.034a6.6 6.6 0 0 0 3.851-11.37ZM5 12.65a5.623 5.623 0 0 0 1.07.083h.02a5.6 5.6 0 0 0 5.6-5.6c0-2.243-1.326-4.193-3.215-5.1A7.57 7.57 0 0 1 10.2 5.1a7.602 7.602 0 0 1-5.2 7.55Z"></path></svg>
+      </button>
+    </div>
+  </div>
+</nav>

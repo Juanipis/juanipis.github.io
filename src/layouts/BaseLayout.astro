@@ -1,0 +1,221 @@
+---
+import "../styles/global.css";
+import { getImage } from "astro:assets";
+import Navbar from "../components/Navbar.astro";
+import coverLight from "../assets/cover-photo-light.webp";
+import { EMAIL, LINKS, NAME, SKILLS } from "../data/agent";
+import { defaultLocale, getDictionary, localizePath, locales, type Locale, type RoutePath } from "../i18n";
+
+interface Props {
+  locale: Locale;
+  /** Ruta sin prefijo de idioma; null en páginas que no tienen equivalente (404). */
+  path: RoutePath | null;
+  title: string;
+  description: string;
+}
+
+const { locale, path, title, description } = Astro.props;
+const t = getDictionary(locale);
+const site = Astro.site!;
+const canonical = path ? new URL(localizePath(locale, path), site).href : undefined;
+const ogImage = await getImage({ src: coverLight, width: 1200, format: "jpg" });
+
+// Datos estructurados (schema.org): quién soy, qué ofrezco y dónde encontrar la versión para máquinas.
+const personId = `${site.href}#person`;
+const structured = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: NAME,
+      alternateName: "Juanipis",
+      url: site.href,
+      image: new URL(ogImage.src, site).href,
+      email: `mailto:${EMAIL}`,
+      jobTitle: t.about.title,
+      description: `${t.hire.badge}. ${t.hire.text}`,
+      address: { "@type": "PostalAddress", addressLocality: "Medellín", addressCountry: "CO" },
+      alumniOf: { "@type": "CollegeOrUniversity", name: "EIA University", url: "https://www.eia.edu.co/" },
+      knowsLanguage: ["es", "en"],
+      knowsAbout: Object.values(SKILLS).flat(),
+      sameAs: [LINKS.github, LINKS.linkedin, "https://twitter.com/juanipis"],
+      makesOffer: {
+        "@type": "Offer",
+        availability: "https://schema.org/InStock",
+        itemOffered: [
+          "AI agents and multi-agent systems",
+          "SaaS backends (Go, Python, PostgreSQL)",
+          "Microsoft Power Platform apps",
+          "Cloud architecture on Azure and AWS",
+        ].map((name) => ({ "@type": "Service", name, provider: { "@id": personId } })),
+      },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${canonical ?? site.href}#page`,
+      url: canonical,
+      name: title,
+      inLanguage: locale,
+      mainEntity: { "@id": personId },
+      isPartOf: { "@type": "WebSite", "@id": `${site.href}#website`, url: site.href, name: "Juanipis" },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#35506f" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {
+      path &&
+        locales.map((l) => (
+          <link rel="alternate" hreflang={l} href={new URL(localizePath(l, path), site).href} />
+        ))
+    }
+    {path && <link rel="alternate" hreflang="x-default" href={new URL(localizePath(defaultLocale, path), site).href} />}
+    <link rel="icon" href="/favicon-light.ico" id="favicon" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:site_name" content="Juanipis" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={new URL(`/og-${locale}.jpg`, site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`Juan Pablo Díaz Correa (Juanipis) · ${t.home.subtitle}`} />
+    <meta property="og:locale" content={locale === "es" ? "es_CO" : "en_US"} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@juanipis" />
+    <script type="application/ld+json" set:html={JSON.stringify(structured)} />
+    <slot name="head" />
+
+    <!-- Versiones para agentes de IA -->
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+    <link rel="alternate" type="text/markdown" href={locale === "es" ? "/es/llms-full.txt" : "/llms-full.txt"} title="Full profile for LLMs" />
+    <link rel="alternate" type="application/json" href={locale === "es" ? "/es/resume.json" : "/resume.json"} title="JSON Resume" />
+    <link rel="me" href={LINKS.github} />
+    <link rel="me" href={LINKS.linkedin} />
+
+    <!-- Antes de pintar: tema guardado (o el del sistema) y favicon a juego. -->
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js");
+        var saved = null;
+        try {
+          saved = localStorage.getItem("juanipis-theme");
+        } catch (e) {}
+        var dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+        root.dataset.theme = dark ? "dark" : "light";
+        var icon = document.getElementById("favicon");
+        if (icon) icon.href = dark ? "/favicon-dark.ico" : "/favicon-light.ico";
+      })();
+    </script>
+    {
+      locale === defaultLocale && path && (
+        // Páginas en inglés: si la persona eligió español (o su navegador está en español
+        // y no ha elegido), pasar a la versión /es/ equivalente.
+        <script is:inline define:vars={{ esPath: localizePath("es", path) }}>
+          try {
+            var pref = localStorage.getItem("juanipis-locale");
+            var browserEs = (navigator.language || "").slice(0, 2) === "es";
+            if (pref === "es" || (!pref && browserEs)) location.replace(esPath + location.hash);
+          } catch (e) {}
+        </script>
+      )
+    }
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only z-[60] rounded-lg bg-accent px-4 py-2 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+    >
+      {t.ui.skip}
+    </a>
+    <Navbar locale={locale} path={path ?? "/"} />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+
+    <button
+      type="button"
+      data-back-to-top
+      aria-label={t.ui.backToTop}
+      title={t.ui.backToTop}
+      class="gradient-bg pointer-events-none fixed right-8 bottom-8 z-50 grid size-12 translate-y-24 scale-0 cursor-pointer place-items-center rounded-full border border-white/20 text-white opacity-0 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl data-[shown]:pointer-events-auto data-[shown]:translate-y-0 data-[shown]:scale-100 data-[shown]:opacity-100"
+    >
+      <svg width="20" height="20" viewBox="0 0 15 15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.135 9.158a.5.5 0 0 0 .707-.023L7.5 5.218l3.658 3.917a.5.5 0 0 0 .73-.684l-4.023-4.31a.5.5 0 0 0-.73 0l-4.023 4.31a.5.5 0 0 0 .023.707Z"></path></svg>
+    </button>
+
+    <script>
+      import { registerWebMcpTools } from "../scripts/webmcp";
+      registerWebMcpTools();
+
+      const root = document.documentElement;
+
+      // Tema claro/oscuro
+      document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
+        const dark = root.dataset.theme !== "dark";
+        root.dataset.theme = dark ? "dark" : "light";
+        try {
+          localStorage.setItem("juanipis-theme", dark ? "dark" : "light");
+        } catch {}
+        const icon = document.getElementById("favicon") as HTMLLinkElement | null;
+        if (icon) icon.href = dark ? "/favicon-dark.ico" : "/favicon-light.ico";
+      });
+
+      // Idioma elegido a mano: se recuerda para la próxima visita.
+      document.querySelectorAll<HTMLElement>("[data-set-locale]").forEach((el) =>
+        el.addEventListener("click", () => {
+          try {
+            localStorage.setItem("juanipis-locale", el.dataset.setLocale!);
+          } catch {}
+        }),
+      );
+
+      // Menú móvil: cerrar al tocar fuera.
+      const menu = document.querySelector<HTMLDetailsElement>("[data-menu]");
+      document.addEventListener("click", (e) => {
+        if (menu?.open && !menu.contains(e.target as Node)) menu.open = false;
+      });
+
+      // Animaciones al entrar en pantalla.
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: "0px 0px -50px 0px" },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Botón "volver arriba"
+      const top = document.querySelector<HTMLButtonElement>("[data-back-to-top]");
+      const onScroll = () => top?.toggleAttribute("data-shown", window.scrollY > 300);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+      top?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+      // La araña suena 🕷️
+      document.querySelectorAll("[data-spider]").forEach((el) =>
+        el.addEventListener("click", () => {
+          new Audio("/spiderman.mp3").play().catch(() => {});
+        }),
+      );
+    </script>
+  </body>
+</html>

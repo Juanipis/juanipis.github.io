@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { getDictionary, type Locale } from "../i18n";
+import { EMAIL } from "../data/agent";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+
+const socials = [
+  { name: "GitHub", handle: "@Juanipis", url: "https://github.com/Juanipis", icon: "github" },
+  { name: "LinkedIn", handle: "in/juanipis", url: "https://www.linkedin.com/in/juanipis/", icon: "linkedin" },
+];
+const email = EMAIL;
+---
+
+<BaseLayout locale={locale} path="/contact/" title={t.meta.contactTitle} description={t.meta.contactDesc}>
+  <section class="mesh flex min-h-[85vh] items-center justify-center px-4 sm:px-8">
+    <div class="w-full max-w-3xl py-16">
+      <header class="enter mb-12 text-center" style="--from-y: 30px">
+        <h1 class="gradient-text text-5xl font-bold tracking-tight md:text-6xl">{t.contact.heading}</h1>
+        <p class="enter mt-4 text-xl text-muted" style="--d: 300ms; --from-y: 15px">{t.contact.subtitle}</p>
+        <p class="enter mx-auto mt-4 max-w-xl text-muted" style="--d: 400ms; --from-y: 15px">{t.hire.text}</p>
+      </header>
+
+      <ul class="mb-10 grid mx-auto grid-cols-1 gap-4 sm:max-w-xl sm:grid-cols-2">
+        {
+          socials.map((social, i) => (
+            <li class="enter" style={`--d: ${400 + i * 100}ms; --from-y: 20px`}>
+              <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="card card-hover flex flex-col items-center gap-3 p-6 no-underline"
+              >
+                <Icon name={social.icon} size={36} class="text-logo" />
+                <span class="text-center">
+                  <span class="block font-bold">{social.name}</span>
+                  <span class="block text-xs text-muted">{social.handle}</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="enter text-center" style="--d: 800ms; --from-y: 20px">
+        <a
+          href={`mailto:${email}`}
+          class="gradient-bg inline-flex items-center gap-2 rounded-full px-8 py-3 font-medium text-white no-underline shadow-lg transition hover:-translate-y-0.5 hover:scale-105 hover:shadow-xl active:scale-95"
+        >
+          <svg width="16" height="16" viewBox="0 0 15 15" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H1Zm0 1h13v.925a.448.448 0 0 0-.241.07L7.5 7.967 1.241 3.995A.448.448 0 0 0 1 3.925V3Zm0 1.908V12h13V4.908L7.741 8.88a.45.45 0 0 1-.482 0L1 4.908Z"></path></svg>
+          {email}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

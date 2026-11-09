@@ -1,0 +1,215 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import avatarLight from "../assets/avatar_juanipis.jpg";
+import avatarDark from "../assets/avatar_juanipis_dark.jpg";
+import { getDictionary, type Locale } from "../i18n";
+import { EMAIL } from "../data/agent";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+
+const name = "Juan Pablo Diaz Correa";
+const linkedinUrl = "https://www.linkedin.com/in/juanipis/";
+const email = EMAIL;
+
+const techStack = [
+  "Python", "TypeScript", "Go", "C#", "SQL", "React", "Astro", "FastAPI", "NestJS", "Next.js",
+  "Pydantic AI", "LangGraph", "RAG", "MCP", "Azure OpenAI", "PostgreSQL", "AWS", "Azure",
+  "Power Platform", "Docker",
+];
+
+type Experience = (typeof t.about.experiences)[number] & { companyUrl?: string; concurrent?: string };
+const experiences = t.about.experiences as Experience[];
+
+// Experiencias simultáneas (mismo `concurrent`) van juntas en un solo punto de la línea de tiempo.
+type Group = { key: string; concurrent: boolean; items: Experience[] };
+const groups: Group[] = [];
+for (const [i, exp] of experiences.entries()) {
+  const last = groups.at(-1);
+  if (exp.concurrent && last?.concurrent && last.key === exp.concurrent) last.items.push(exp);
+  else groups.push({ key: exp.concurrent ?? `single-${i}`, concurrent: !!exp.concurrent, items: [exp] });
+}
+
+const languages = [
+  { label: t.about.spanish, level: t.about.native, width: "100%" },
+  { label: t.about.english, level: "B2", width: "75%" },
+];
+---
+
+<BaseLayout locale={locale} path="/about-me/" title={t.meta.aboutTitle} description={t.meta.aboutDesc}>
+  <section class="px-4 py-12 sm:px-8">
+    <div class="mx-auto max-w-5xl">
+      <header class="enter mb-12 text-center" style="--from-y: 30px">
+        <div class="enter mb-4 inline-block transition-transform hover:scale-105" style="--d: 200ms; --from-y: 0; --from-scale: 0.8">
+          <span class="block size-32 overflow-hidden rounded-full" style="box-shadow: 0 0 0 4px var(--accent-soft)">
+            <Image src={avatarLight} alt={name} width={128} height={128} densities={[1, 2]} class="only-light size-full object-cover" loading="eager" />
+            <Image src={avatarDark} alt={name} width={128} height={128} densities={[1, 2]} class="only-dark size-full object-cover" loading="eager" />
+          </span>
+        </div>
+        <h1 class="enter gradient-text text-4xl font-bold tracking-tight" style="--d: 300ms; --from-y: 15px">{name}</h1>
+        <p class="enter text-xl text-muted" style="--d: 400ms; --from-y: 10px">{t.about.title}</p>
+
+        <div class="enter mt-4 flex flex-wrap items-center justify-center gap-6 text-sm" style="--d: 500ms; --from-y: 10px">
+          <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-muted no-underline transition hover:-translate-y-0.5 hover:text-fg">
+            <Icon name="linkedin" size={15} class="text-logo" />
+            LinkedIn
+          </a>
+          <a href={`mailto:${email}`} class="inline-flex items-center gap-1.5 text-muted no-underline transition hover:-translate-y-0.5 hover:text-fg">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="currentColor" class="text-logo" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H1Zm0 1h13v.925a.448.448 0 0 0-.241.07L7.5 7.967 1.241 3.995A.448.448 0 0 0 1 3.925V3Zm0 1.908V12h13V4.908L7.741 8.88a.45.45 0 0 1-.482 0L1 4.908Z"></path></svg>
+            {email}
+          </a>
+        </div>
+      </header>
+
+      <hr class="mb-10 border-line" />
+
+      <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_1fr]">
+        <div>
+          <section class="reveal mb-8" style="--from-y: 0">
+            <h2 class="mb-3 text-xl font-bold">{t.about.aboutHeading}</h2>
+            <p class="leading-relaxed text-muted [&_strong]:text-fg" set:html={t.about.aboutText} />
+          </section>
+
+          <hr class="mb-8 border-line" />
+
+          <section class="reveal" style="--d: 100ms; --from-y: 0">
+            <h2 class="mb-4 text-xl font-bold">{t.about.experienceHeading}</h2>
+            <ol class="relative ml-4">
+              <li aria-hidden="true" class="absolute top-0 bottom-0 left-0 w-0.5 rounded-full" style="background: linear-gradient(180deg, var(--accent) 0%, var(--accent-soft) 100%)"></li>
+              {
+                groups.map((group, g) => (
+                  <li class="relative mb-6 pl-8">
+                    <span class="absolute top-2 left-[-5px] z-10 block size-3" aria-hidden="true">
+                      <span
+                        class="block size-3 rounded-full border-2 border-accent"
+                        style={group.concurrent ? "background: var(--accent)" : "background: var(--bg)"}
+                      />
+                      {group.concurrent && <span class="pulse-ring absolute inset-0 rounded-full border-2 border-accent" />}
+                    </span>
+
+                    {group.concurrent && (
+                      <span class="gradient-bg mb-3 inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold text-white">
+                        {t.about.currentLabel}
+                      </span>
+                    )}
+
+                    <div class:list={["grid grid-cols-1 gap-3", group.concurrent && "md:grid-cols-2"]}>
+                      {group.items.map((exp, c) => (
+                        <article
+                          class="reveal card relative p-4 hover:border-line-strong"
+                          style={`--d: ${group.concurrent ? c * 150 : g * 100}ms; --from-y: 15px`}
+                        >
+                          {group.concurrent && (
+                            <span
+                              aria-hidden="true"
+                              class="absolute top-4 left-0 hidden size-0 -translate-x-full border-y-4 border-l-[6px] border-y-transparent md:block"
+                              style="border-left-color: var(--accent)"
+                            />
+                          )}
+                          <h3 class="font-bold">{exp.role}</h3>
+                          <p class="text-sm text-muted">{exp.period}</p>
+                          <p class="text-sm font-medium">
+                            {exp.companyUrl ? (
+                              <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer" class="text-accent-fg underline-offset-2 hover:underline">
+                                {exp.company}
+                              </a>
+                            ) : (
+                              exp.company
+                            )}
+                          </p>
+                          <p class="mt-1 text-sm text-muted">{exp.summary}</p>
+                          <ul class="mt-2 ml-4 list-disc space-y-1 text-xs text-muted">
+                            {exp.highlights.map((h) => (
+                              <li>{h}</li>
+                            ))}
+                          </ul>
+                        </article>
+                      ))}
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
+          </section>
+        </div>
+
+        <div>
+          <section class="reveal mb-8" style="--from-y: 0">
+            <h2 class="mb-3 text-xl font-bold">{t.about.techStackHeading}</h2>
+            <ul class="flex flex-wrap gap-2">
+              {techStack.map((tech) => <li class="chip gradient-bg font-medium text-white">{tech}</li>)}
+            </ul>
+          </section>
+
+          <hr class="mb-8 border-line" />
+
+          <section class="reveal mb-8" style="--d: 100ms; --from-y: 0">
+            <h2 class="mb-3 text-xl font-bold">{t.about.educationHeading}</h2>
+            <div class="card p-4">
+              <h3 class="font-bold">{t.about.educationDegree}</h3>
+              <p class="text-sm text-muted">{t.about.educationSchool}</p>
+              <p class="text-sm text-muted">{t.about.educationPeriod}</p>
+            </div>
+          </section>
+
+          <hr class="mb-8 border-line" />
+
+          <section class="reveal mb-8" style="--d: 200ms; --from-y: 0">
+            <h2 class="mb-3 text-xl font-bold">{t.about.languagesHeading}</h2>
+            <div class="space-y-3">
+              {
+                languages.map((lang) => (
+                  <div>
+                    <div class="mb-1 flex justify-between text-sm">
+                      <span>{lang.label}</span>
+                      <span class="text-xs text-muted">{lang.level}</span>
+                    </div>
+                    <div class="h-1.5 overflow-hidden rounded-full bg-track">
+                      <div class="bar-fill h-full rounded-full bg-linear-to-r from-accent to-accent-2" style={`--w: ${lang.width}`} />
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <hr class="mb-8 border-line" />
+
+          <section class="reveal mb-8" style="--d: 300ms; --from-y: 0">
+            <h2 class="mb-3 text-xl font-bold">{t.about.awardsHeading}</h2>
+            <ul class="space-y-3">
+              {
+                t.about.awards.map((award) => (
+                  <li class="card flex gap-3 p-4">
+                    <span class="gradient-bg grid size-9 shrink-0 place-items-center rounded-full text-white" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10v2h4v3a5 5 0 0 1-4.6 5A5 5 0 0 1 13 15.9V18h3v2H8v-2h3v-2.1A5 5 0 0 1 7.6 12 5 5 0 0 1 3 7V4h4V2Zm10 4v4a3 3 0 0 0 2-3V6h-2ZM5 6v1a3 3 0 0 0 2 3V6H5Z" /></svg>
+                    </span>
+                    <span>
+                      <span class="block font-bold">{award.title}</span>
+                      <span class="block text-sm text-muted">{award.text}</span>
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+
+          <hr class="mb-8 border-line" />
+
+          <section class="reveal" style="--d: 400ms; --from-y: 0">
+            <h2 class="mb-3 text-xl font-bold">{t.about.softSkillsHeading}</h2>
+            <ul class="flex flex-wrap gap-2">
+              {t.about.softSkills.map((skill) => <li class="chip card">{skill}</li>)}
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,69 @@
+name: Publicar en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Sin permisos por defecto; cada job pide solo lo suyo.
+permissions: {}
+
+# Una sola publicación a la vez; la más nueva gana.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      # Acciones fijadas por SHA (la etiqueta va en el comentario).
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Instalar, compilar y subir dist/
+        uses: withastro/action@a8b97df764791eb61fbf3338ef713b0e61ae05c5 # v6.1.4
+        with:
+          node-version: 24
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+  # Avisa a Bing (y a los demás buscadores de IndexNow: Yandex, Naver, Seznam…) que las
+  # páginas del sitemap cambiaron. La clave es pública a propósito: se verifica con
+  # https://juanipis.xyz/5fb5fc3a1c50dee42d0db0a1fd7539c5.txt
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions: {}
+    env:
+      SITE: https://juanipis.xyz
+      INDEXNOW_KEY: 5fb5fc3a1c50dee42d0db0a1fd7539c5
+    steps:
+      - name: Enviar las URLs del sitemap a IndexNow
+        run: |
+          sleep 60  # dar tiempo a que GitHub Pages sirva la versión nueva
+          urls=$(curl -fsSL "$SITE/sitemap-0.xml" | grep -o '<loc>[^<]*</loc>' | sed -e 's#<loc>##' -e 's#</loc>##')
+          extra="$SITE/llms.txt $SITE/llms-full.txt $SITE/es/llms-full.txt $SITE/resume.json"
+          lista=$(printf '%s\n' $urls $extra | jq -R . | jq -s .)
+          body=$(jq -n --arg host "juanipis.xyz" --arg key "$INDEXNOW_KEY" --arg loc "$SITE/$INDEXNOW_KEY.txt" --argjson urls "$lista" \
+            '{host: $host, key: $key, keyLocation: $loc, urlList: $urls}')
+          echo "$body" | jq -r '.urlList[]'
+          code=$(curl -s -o /tmp/respuesta -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' -d "$body")
+          echo "IndexNow respondió HTTP $code"; cat /tmp/respuesta || true
+          # 200 = recibido, 202 = recibido y la clave se valida después
+          case "$code" in 200|202) ;; *) exit 1 ;; esac

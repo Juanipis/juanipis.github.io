@@ -1,0 +1,29 @@
+# juanipis.xyz — portafolio de Juan Pablo Díaz Correa (Juanipis), freelancer.
+# Bienvenidos buscadores y agentes de IA: todo el sitio es público.
+# Resumen para modelos de lenguaje: https://juanipis.xyz/llms.txt
+# Perfil completo: https://juanipis.xyz/llms-full.txt · CV estructurado: https://juanipis.xyz/resume.json
+
+User-agent: *
+Allow: /
+
+# Asistentes y buscadores de IA (permitidos de forma explícita)
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Meta-ExternalAgent
+User-agent: DuckAssistBot
+User-agent: MistralAI-User
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://juanipis.xyz/sitemap-index.xml

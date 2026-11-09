@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getDictionary } from "../i18n";
+
+// GitHub Pages sirve dist/404.html para cualquier ruta que no exista. Se muestra en los dos idiomas.
+const en = getDictionary("en").notFound;
+const es = getDictionary("es").notFound;
+---
+
+<BaseLayout locale="en" path={null} title={`404 · Juanipis`} description={en.text}>
+  <section class="mesh flex min-h-[70vh] items-center justify-center px-4 text-center">
+    <div class="enter">
+      <p class="gradient-text text-8xl font-bold">404</p>
+      <h1 class="mt-4 text-2xl font-bold">{en.title}</h1>
+      <p class="mt-2 text-muted">{en.text}</p>
+      <p class="mt-6 text-muted" lang="es">{es.title} · {es.text}</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/" class="gradient-bg rounded-full px-6 py-2.5 font-medium text-white no-underline shadow-lg transition hover:-translate-y-0.5">{en.back}</a>
+        <a href="/es/" lang="es" class="card rounded-full px-6 py-2.5 font-medium no-underline transition hover:-translate-y-0.5">{es.back}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

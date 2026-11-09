@@ -1,0 +1,133 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "home": {
+    "greeting": "Hola, soy Juanipis",
+    "subtitle": "Ingeniero de Sistemas y Computación · Universidad EIA",
+    "description": "Ingeniero de Sistemas y Computación de la Universidad EIA, en Medellín, Colombia. Diseño backends SaaS multi-tenant, apps empresariales en Power Platform y agentes de IA que hacen trabajo de verdad, y me encanta desarmar cómo funcionan las cosas.",
+    "techHeading": "Tecnologías con las que trabajo"
+  },
+  "about": {
+    "title": "Ingeniero de Sistemas y Computación (Universidad EIA)",
+    "aboutHeading": "Sobre mí",
+    "aboutText": "Soy graduado de <strong>Ingeniería de Sistemas y Computación</strong> de la <em>Universidad EIA</em>. Hoy soy el <strong>líder técnico</strong> en <strong>PROCOL</strong>: llevo la parte técnica y cómo construimos el software, de la mano con el líder del equipo de software, con quien me complemento. Allí construyo un SaaS multi-tenant en <strong>Go + PostgreSQL</strong> sobre Azure y apps empresariales con <strong>Power Apps Code Apps</strong>, y desarrollo <strong>agentes de IA</strong> para <strong>ABACO</strong> que redactan boletines de política de seguridad alimentaria y responden preguntas sobre datos de nutrición infantil. Fuera del trabajo hago ingeniería inversa de formatos y protocolos, programo apps nativas para macOS y automatizo mi casa.",
+    "experienceHeading": "Experiencia",
+    "currentLabel": "Actual",
+    "techStackHeading": "Stack Tecnológico",
+    "educationHeading": "Educación",
+    "educationDegree": "Ingeniería de Sistemas y Computación",
+    "educationSchool": "Universidad EIA",
+    "educationPeriod": "Ene 2021 - Dic 2025 (Graduado)",
+    "languagesHeading": "Idiomas",
+    "spanish": "Español",
+    "english": "Inglés",
+    "native": "Nativo",
+    "softSkillsHeading": "Habilidades Blandas",
+    "experiences": [
+      {
+        "role": "Líder Técnico",
+        "period": "Nov 2025 - Actualidad",
+        "company": "PROCOL",
+        "companyUrl": "https://www.procol.no/",
+        "concurrent": "current",
+        "summary": "Lidero la parte técnica —arquitectura, prácticas de ingeniería y cómo construimos el software— de la mano con el líder del equipo de software.",
+        "highlights": [
+          "Diseñé y construí el backend en Go + PostgreSQL de un SaaS de contabilidad de contratos de construcción: identidad multi-tenant con Ory Hydra federado al Entra ID de cada cliente e infraestructura en Bicep sobre Azure; bajé consultas críticas de 9,4 s a 71 ms.",
+          "Adopté Power Apps Code Apps cuando aún estaban en preview y arranqué la app del equipo en React / TypeScript sobre Dataverse con Arquitectura Limpia/Hexagonal.",
+          "Custom APIs de Dataverse, roles de seguridad, acceso granular a los datos y migraciones auditadas en producción.",
+          "Integré agentes de IA con Power Platform y Teams que revisan código y crean features en Azure DevOps vía MCP.",
+          "Monté el flujo de desarrollo con IA del equipo, publiqué un design system de React como paquete npm privado e hice ingeniería inversa del formato .rvt de Revit en un visor con WebAssembly + Three.js."
+        ]
+      },
+      {
+        "role": "Ingeniero de IA (Freelance)",
+        "period": "Ago 2025 - Actualidad",
+        "company": "ABACO",
+        "concurrent": "current",
+        "summary": "Agentes de IA para la Asociación de Bancos de Alimentos de Colombia.",
+        "highlights": [
+          "Construí la plataforma multi-agente (Pydantic AI sobre Azure OpenAI) que redacta los boletines de política de seguridad alimentaria: análisis en un sandbox, figuras con Plotly y PDF y DOCX listos para publicar, con revisión humana.",
+          "Construí el agente del Observatorio en AWS Lambda, que responde preguntas sobre indicadores de nutrición infantil con gráficas, mapas coropléticos y series de tiempo.",
+          "Colaboré en el servicio RAG del chatbot público y en los pipelines de datos de salud pública; autor de pdfgen-juanipis, la librería de HTML a PDF de los boletines."
+        ]
+      },
+      {
+        "role": "Practicante",
+        "period": "Ene 2025 - Jul 2025",
+        "company": "ISA",
+        "companyUrl": "https://www.isa.co/",
+        "summary": "Digitalicé el proceso de visitas de campo.",
+        "highlights": [
+          "Reemplacé un proceso manual en Excel por un formulario en Survey123 (fotos georreferenciadas y notas de voz) y un flujo de Power Automate que guardaba los datos en SharePoint.",
+          "Construí una app de escritorio en Python (Flet) que genera reportes y transcribe audio con faster-whisper."
+        ]
+      },
+      {
+        "role": "Desarrollador Full Stack Remoto",
+        "period": "Jun 2023 - Feb 2024",
+        "company": "Kuenta",
+        "companyUrl": "https://kuenta.co/",
+        "summary": "Backend y frontend para una plataforma fintech.",
+        "highlights": [
+          "Microservicios en Go y Python (gRPC), servicios de IA y Dockerfiles.",
+          "Componentes en Angular-Ionic, pipelines de CI/CD en GitLab y corrección de errores en servicios Java."
+        ]
+      }
+    ],
+    "softSkills": [
+      "Trabajo en equipo",
+      "Resolución de problemas",
+      "Liderazgo",
+      "Comunicación",
+      "Adaptabilidad",
+      "Gestión del tiempo"
+    ],
+    "awardsHeading": "Premios",
+    "awards": [
+      {
+        "title": "Segundo lugar, Hackathon de IA Generativa",
+        "text": "Universidad EIA · chatbot que genera fondos de producto para anuncios."
+      }
+    ]
+  },
+  "projects": {
+    "heading": "Mis Proyectos",
+    "subtitle": "Una colección de cosas que he construido",
+    "viewProject": "Ver"
+  },
+  "contact": {
+    "heading": "Conectemos",
+    "subtitle": "Soy freelancer y siempre estoy abierto a propuestas, ideas y proyectos que quieran cambiar el mundo."
+  },
+  "meta": {
+    "homeTitle": "Juanipis | Ingeniero de Sistemas y Computación",
+    "homeDesc": "Portafolio de Juan Pablo Díaz Correa (Juanipis), Ingeniero de Sistemas y Computación de la Universidad EIA (Colombia): backends SaaS en Go, apps en Power Platform y agentes de IA. Disponible para freelance.",
+    "aboutTitle": "Juanipis | Sobre Mí",
+    "aboutDesc": "Conoce a Juan Pablo Díaz Correa (Juanipis): Ingeniero de Sistemas y Computación de la Universidad EIA con experiencia en agentes de IA, backends SaaS y Power Platform.",
+    "projectsTitle": "Juanipis | Proyectos",
+    "projectsDesc": "Explora los proyectos de Juan Pablo Díaz Correa (Juanipis): agentes de IA, aplicaciones web, apps móviles, APIs y más.",
+    "contactTitle": "Juanipis | Contacto",
+    "contactDesc": "Contacta a Juan Pablo Díaz Correa (Juanipis). Conecta en GitHub, LinkedIn o envía un correo."
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "text": "Esta página no existe o se movió.",
+    "back": "Volver al inicio"
+  },
+  "ui": {
+    "menu": "Menú",
+    "toggleTheme": "Cambiar modo oscuro",
+    "switchLang": "Switch to English",
+    "backToTop": "Volver arriba",
+    "skip": "Saltar al contenido"
+  },
+  "hire": {
+    "badge": "Disponible para proyectos freelance",
+    "text": "Trabajo como freelancer independiente y siempre estoy abierto a propuestas: agentes de IA, backends SaaS, apps en Power Platform o cualquier proyecto que quiera cambiar el mundo. Escríbeme en español o en inglés.",
+    "cta": "Envíame una propuesta"
+  }
+}
